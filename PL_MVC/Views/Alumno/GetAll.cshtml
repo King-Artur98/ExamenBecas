@@ -1,0 +1,49 @@
+﻿@model ML.Alumno
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container">
+    <h2>Alumno</h2>
+    <div class="row">
+        <div style="float:left">
+            @Html.ActionLink("+", "Form", "Alumno", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+    </div>
+    <hr />
+    <div class="row">
+        <table class="table table-responsive">
+            <thead>
+                <tr>
+
+                    <th> <center>Editar </center></th>
+                    <th> <center>IdAlumno </center></th>
+                    <th> <center>Nombre </center></th>
+                    <th> <center>Genero </center></th>
+                    <th> <center>Edad </center></th>
+                    <th> <center>Beca </center></th>
+
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (ML.Alumno alumno in Model.Alumnos)
+                {
+                    <tr>
+
+                        <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Alumno", new {IdAlumno= alumno.IdAlumno})"></a> </td>
+                        <td> <center>@alumno.IdAlumno </center></td>
+                        <td> <center>@alumno.Nombre @alumno.ApellidoPaterno @alumno.ApellidoMaterno  </center></td>
+                        <td> <center>@alumno.Genero </center></td>
+                        <td> <center>@alumno.Edad </center></td>
+                        <td class="hidden"> <center>@alumno.Beca.IdBeca </center></td>
+                        <td> <center>@alumno.Beca.Nombre </center></td>
+
+                        <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-trash" href="@Url.Action("Delete", "Alumno", new {IdAlumno= alumno.IdAlumno})" onclick="return confirm('Estas seguro que deseas eliminar? ');"></a> </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
